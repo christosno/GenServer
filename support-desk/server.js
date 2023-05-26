@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 app.use("/api/users", require("./routes/userRoutes"));
 
 // file routes
-app.use("/api/upload", require("./routes/fileRouts"));
+app.use("/api/files", require("./routes/fileRouts"));
 
 
 const { errorHandler } = require("./midddlewere/errorMiddlerwere");

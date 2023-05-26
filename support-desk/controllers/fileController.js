@@ -29,6 +29,7 @@ const uploadFile = asyncHandler(async (req, res) => {
 
     if (file) {
         res.json({
+            _id: file._id,
             userId: file.userId,
             fileName: file.file.filename
         });
@@ -39,8 +40,27 @@ const uploadFile = asyncHandler(async (req, res) => {
 }
 );
 
+
+const getFiles = asyncHandler(async (req, res) => {
+
+    const files = await File.find({});
+
+    if (files) {
+        res.json({
+            files: files
+        });
+    } else {
+        res.status(400);
+        throw new Error("Couldn't retrive the files");
+    }
+
+});
+
+
+
 module.exports = {
-    uploadFile
+    uploadFile,
+    getFiles
 };
 
 
