@@ -1,6 +1,7 @@
 const express = require("express");
 const colors = require("colors");
 const dotenv = require("dotenv").config();
+const cors = require('cors');
 
 const connectDB = require("./config/db");
 const PORT = process.env.PORT || 5000;
@@ -9,6 +10,7 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -17,11 +19,14 @@ app.get("/", (req, res) => {
     res.status(200).json({ message: "Welcame to support API" });
 });
 
-// Routes
+// User Routes
 app.use("/api/users", require("./routes/userRoutes"));
 
 // file routes
 app.use("/api/files", require("./routes/fileRouts"));
+
+// ticket routes
+app.use("/api/tickets", require("./routes/ticketRoutes"));
 
 
 const { errorHandler } = require("./midddlewere/errorMiddlerwere");
